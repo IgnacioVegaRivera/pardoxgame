@@ -1,6 +1,6 @@
 [gd_scene load_steps=5 format=4 uid="uid://daibdkn16jgh8"]
 
-[ext_resource type="Material" uid="uid://bvyyg8r6dpfei" path="res://Fantasy_FREE/materials/ITHappy.tres" id="1_wcm8h"]
+[ext_resource type="Material" uid="uid://bvyyg8r6dpfei" path="res://Fantasy_Free/materials/ITHappy.tres" id="1_wcm8h"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pm1g1"]
 resource_name = "Material"

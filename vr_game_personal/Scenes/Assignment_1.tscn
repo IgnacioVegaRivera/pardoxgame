@@ -1,10 +1,10 @@
 [gd_scene load_steps=11 format=3 uid="uid://b00je48xihk82"]
 
-[ext_resource type="Script" uid="uid://4k1k4j4sgq0a" path="res://Scenes/assignment_1.gd" id="1_ja4fk"]
+[ext_resource type="Script" uid="uid://4k1k4j4sgq0a" path="res://Scripts/Base_VR_Scripts/assignment_1.gd" id="1_ja4fk"]
 [ext_resource type="PackedScene" uid="uid://dts2lna54s34q" path="res://Fantasy_Free/nodes/cactus_001.tscn" id="2_qqxp7"]
 [ext_resource type="PackedScene" uid="uid://clblo4uu1xcd6" path="res://Fantasy_Free/nodes/crane_001.tscn" id="3_ipxwy"]
 [ext_resource type="PackedScene" uid="uid://cx18si7h2hsh3" path="res://Fantasy_Free/nodes/fabulous_mushroom_002.tscn" id="4_440ow"]
-[ext_resource type="Script" uid="uid://dmgbmx273u52g" path="res://Fantasy_Free/nodes/cactus_001.gd" id="4_xqvso"]
+[ext_resource type="Script" uid="uid://dmgbmx273u52g" path="res://Scripts/Archived Scripts/cactus_001.gd" id="4_xqvso"]
 [ext_resource type="PackedScene" uid="uid://o16t32wb3as4" path="res://Fantasy_Free/nodes/jug_001.tscn" id="5_xqvso"]
 
 [sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ja4fk"]
@@ -69,23 +69,23 @@ shadow_enabled = true
 transform = Transform3D(100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, -0.5, 0)
 material = SubResource("StandardMaterial3D_ja4fk")
 
-[node name="cactus_001" parent="." instance=ExtResource("2_qqxp7")]
+[node name="cactus_001" parent="World EVO" instance=ExtResource("2_qqxp7")]
 transform = Transform3D(0.99513, 0.0954805, -0.0244864, -0.0948487, 0.995158, 0.0257859, 0.0268299, -0.0233378, 0.999367, -0.368747, -0.578441, -4.93521)
 script = ExtResource("4_xqvso")
 
-[node name="crane_001" parent="." instance=ExtResource("3_ipxwy")]
+[node name="crane_001" parent="World EVO" instance=ExtResource("3_ipxwy")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.51016, 0.217576, -1.38591)
 
-[node name="fabulous_mushroom_002" parent="." instance=ExtResource("4_440ow")]
+[node name="fabulous_mushroom_002" parent="World EVO" instance=ExtResource("4_440ow")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.73095, 0, -0.0762321)
 
-[node name="jug_001" parent="." instance=ExtResource("5_xqvso")]
+[node name="jug_001" parent="World EVO" instance=ExtResource("5_xqvso")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.252722, 1.60574, 3.15538)
 
-[node name="cactus_002" parent="." instance=ExtResource("2_qqxp7")]
-transform = Transform3D(0.986345, 0.0963394, -0.133574, -0.0937932, 0.995272, 0.0252404, 0.135374, -0.0123675, 0.990717, 2.70416, -0.578441, -8.96773)
+[node name="cactus_002" parent="World EVO" instance=ExtResource("2_qqxp7")]
+transform = Transform3D(0.9162055, -0.0051783975, 0.40067738, -0.041925736, 0.9931917, 0.10870421, -0.3985127, -0.11639413, 0.90974885, -1.0894902, -0.47056997, -4.96278)
 script = ExtResource("4_xqvso")
 
-[node name="cactus_002" parent="cactus_002" instance=ExtResource("2_qqxp7")]
-transform = Transform3D(0.853679, -0.114019, 0.508167, 0.0514678, 0.989436, 0.13554, -0.518253, -0.0895534, 0.850528, -3.2098, -0.307648, 4.47723)
+[node name="cactus_003" parent="World EVO" instance=ExtResource("2_qqxp7")]
+transform = Transform3D(0.986345, 0.0963394, -0.133574, -0.0937932, 0.995272, 0.0252404, 0.135374, -0.0123675, 0.990717, 2.70416, -0.578441, -8.96773)
 script = ExtResource("4_xqvso")

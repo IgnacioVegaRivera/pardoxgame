@@ -1,0 +1,91 @@
+[gd_scene load_steps=11 format=3 uid="uid://b00je48xihk82"]
+
+[ext_resource type="Script" uid="uid://4k1k4j4sgq0a" path="res://Scenes/assignment_1.gd" id="1_ja4fk"]
+[ext_resource type="PackedScene" uid="uid://dts2lna54s34q" path="res://Fantasy_Free/nodes/cactus_001.tscn" id="2_qqxp7"]
+[ext_resource type="PackedScene" uid="uid://clblo4uu1xcd6" path="res://Fantasy_Free/nodes/crane_001.tscn" id="3_ipxwy"]
+[ext_resource type="PackedScene" uid="uid://cx18si7h2hsh3" path="res://Fantasy_Free/nodes/fabulous_mushroom_002.tscn" id="4_440ow"]
+[ext_resource type="Script" uid="uid://dmgbmx273u52g" path="res://Fantasy_Free/nodes/cactus_001.gd" id="4_xqvso"]
+[ext_resource type="PackedScene" uid="uid://o16t32wb3as4" path="res://Fantasy_Free/nodes/jug_001.tscn" id="5_xqvso"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ja4fk"]
+rayleigh_coefficient = 2.39
+mie_eccentricity = 0.85
+turbidity = 182.42
+sun_disk_scale = 67.21
+ground_color = Color(0.388492, 0.444036, 0.919925, 1)
+energy_multiplier = 4.0
+
+[sub_resource type="Sky" id="Sky_ja4fk"]
+sky_material = SubResource("PhysicalSkyMaterial_ja4fk")
+
+[sub_resource type="Environment" id="Environment_ja4fk"]
+background_mode = 2
+background_color = Color(0.616959, 0.943646, 0.98943, 1)
+sky = SubResource("Sky_ja4fk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ja4fk"]
+albedo_color = Color(0.180392, 0.380392, 1, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_ja4fk")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00107002, -0.00701082, -0.00129175)
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LEFT HAND" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="XROrigin3D/LEFT HAND"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="RIGHT HAND" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="XROrigin3D/RIGHT HAND"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ja4fk")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.726575, 0.687087, 0, -0.687087, 0.726575, 0, 3.87246, 1.07795)
+light_color = Color(0.999275, 0.716096, 0.602485, 1)
+light_energy = 4.232
+light_indirect_energy = 2.859
+spot_angle = 42.8809
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.682955, -0.694259, 0.227106, 0, 0.310909, 0.95044, -0.73046, -0.649108, 0.212337, 0.083616, 4.04835, 0.53756)
+shadow_enabled = true
+
+[node name="World EVO" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World EVO"]
+transform = Transform3D(100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, -0.5, 0)
+material = SubResource("StandardMaterial3D_ja4fk")
+
+[node name="cactus_001" parent="." instance=ExtResource("2_qqxp7")]
+transform = Transform3D(0.99513, 0.0954805, -0.0244864, -0.0948487, 0.995158, 0.0257859, 0.0268299, -0.0233378, 0.999367, -0.368747, -0.578441, -4.93521)
+script = ExtResource("4_xqvso")
+
+[node name="crane_001" parent="." instance=ExtResource("3_ipxwy")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.51016, 0.217576, -1.38591)
+
+[node name="fabulous_mushroom_002" parent="." instance=ExtResource("4_440ow")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.73095, 0, -0.0762321)
+
+[node name="jug_001" parent="." instance=ExtResource("5_xqvso")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.252722, 1.60574, 3.15538)
+
+[node name="cactus_002" parent="." instance=ExtResource("2_qqxp7")]
+transform = Transform3D(0.986345, 0.0963394, -0.133574, -0.0937932, 0.995272, 0.0252404, 0.135374, -0.0123675, 0.990717, 2.70416, -0.578441, -8.96773)
+script = ExtResource("4_xqvso")
+
+[node name="cactus_002" parent="cactus_002" instance=ExtResource("2_qqxp7")]
+transform = Transform3D(0.853679, -0.114019, 0.508167, 0.0514678, 0.989436, 0.13554, -0.518253, -0.0895534, 0.850528, -3.2098, -0.307648, 4.47723)
+script = ExtResource("4_xqvso")
