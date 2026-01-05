@@ -1,0 +1,174 @@
+[gd_scene load_steps=17 format=3 uid="uid://b00je48xihk82"]
+
+[ext_resource type="Script" uid="uid://4k1k4j4sgq0a" path="res://Scripts/Base_VR_Scripts/assignment_1.gd" id="1_c73k0"]
+[ext_resource type="PackedScene" uid="uid://dts2lna54s34q" path="res://Fantasy_Free/nodes/cactus_001.tscn" id="2_r3jfw"]
+[ext_resource type="Script" uid="uid://dmgbmx273u52g" path="res://Scripts/Archived Scripts/cactus_001.gd" id="3_fik4v"]
+[ext_resource type="PackedScene" uid="uid://clblo4uu1xcd6" path="res://Fantasy_Free/nodes/crane_001.tscn" id="4_bkxco"]
+[ext_resource type="PackedScene" uid="uid://cx18si7h2hsh3" path="res://Fantasy_Free/nodes/fabulous_mushroom_002.tscn" id="5_ks6yo"]
+[ext_resource type="PackedScene" uid="uid://o16t32wb3as4" path="res://Fantasy_Free/nodes/jug_001.tscn" id="6_sbrsb"]
+[ext_resource type="Script" uid="uid://4p6dtilpbu5m" path="res://Scripts/finalDestination/arrowMove.gd" id="7_islpi"]
+
+[sub_resource type="PhysicalSkyMaterial" id="PhysicalSkyMaterial_ja4fk"]
+rayleigh_coefficient = 2.39
+mie_eccentricity = 0.85
+turbidity = 182.42
+sun_disk_scale = 67.21
+ground_color = Color(0.388492, 0.444036, 0.919925, 1)
+energy_multiplier = 4.0
+
+[sub_resource type="Sky" id="Sky_ja4fk"]
+sky_material = SubResource("PhysicalSkyMaterial_ja4fk")
+
+[sub_resource type="Environment" id="Environment_ja4fk"]
+background_mode = 2
+background_color = Color(0.616959, 0.943646, 0.98943, 1)
+sky = SubResource("Sky_ja4fk")
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ja4fk"]
+albedo_color = Color(0.180392, 0.380392, 1, 1)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_k3xk7"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_p6gy0"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(1, 0, 0.5803922, 0.54901963)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wn1eb"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_idc6y"]
+albedo_color = Color(0.48339885, 2.6765938, 2.6765938, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_ydsm2"]
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_c73k0")
+
+[node name="XROrigin3D" type="XROrigin3D" parent="."]
+process_mode = 4
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00107002, -0.00701082, -0.00129175)
+visible = false
+
+[node name="XRCamera3D" type="XRCamera3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="LEFT HAND" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="XROrigin3D/LEFT HAND"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="RIGHT HAND" type="XRController3D" parent="XROrigin3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="XROrigin3D/RIGHT HAND"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_ja4fk")
+
+[node name="SpotLight3D" type="SpotLight3D" parent="WorldEnvironment"]
+transform = Transform3D(1, 0, 0, 0, 0.726575, 0.687087, 0, -0.687087, 0.726575, 0, 3.87246, 1.07795)
+light_color = Color(0.999275, 0.716096, 0.602485, 1)
+light_energy = 4.232
+light_indirect_energy = 2.859
+spot_angle = 42.8809
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="WorldEnvironment"]
+transform = Transform3D(0.682955, -0.694259, 0.227106, 0, 0.310909, 0.95044, -0.73046, -0.649108, 0.212337, 0.083616, 4.04835, 0.53756)
+shadow_enabled = true
+
+[node name="World EVO" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="World EVO"]
+transform = Transform3D(100, 0, 0, 0, 0.1, 0, 0, 0, 100, 0, -0.5, 0)
+visible = false
+material = SubResource("StandardMaterial3D_ja4fk")
+
+[node name="cactus_001" parent="World EVO" instance=ExtResource("2_r3jfw")]
+transform = Transform3D(0.99513, 0.0954805, -0.0244864, -0.0948487, 0.995158, 0.0257859, 0.0268299, -0.0233378, 0.999367, -0.368747, -0.578441, -4.93521)
+visible = false
+script = ExtResource("3_fik4v")
+
+[node name="crane_001" parent="World EVO" instance=ExtResource("4_bkxco")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5.51016, 0.217576, -1.38591)
+visible = false
+
+[node name="fabulous_mushroom_002" parent="World EVO" instance=ExtResource("5_ks6yo")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.73095, 0, -0.0762321)
+visible = false
+
+[node name="jug_001" parent="World EVO" instance=ExtResource("6_sbrsb")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.252722, 1.60574, 3.15538)
+visible = false
+
+[node name="cactus_002" parent="World EVO" instance=ExtResource("2_r3jfw")]
+transform = Transform3D(0.9162055, -0.0051783975, 0.40067738, -0.041925736, 0.9931917, 0.10870421, -0.3985127, -0.11639413, 0.90974885, -1.0894902, -0.47056997, -4.96278)
+visible = false
+script = ExtResource("3_fik4v")
+
+[node name="cactus_003" parent="World EVO" instance=ExtResource("2_r3jfw")]
+transform = Transform3D(0.986345, 0.0963394, -0.133574, -0.0937932, 0.995272, 0.0252404, 0.135374, -0.0123675, 0.990717, 2.70416, -0.578441, -8.96773)
+script = ExtResource("3_fik4v")
+
+[node name="Player" type="XROrigin3D" parent="."]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.123353, 0)
+script = ExtResource("7_islpi")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Left" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Left"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Right" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Right"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/Right"]
+transform = Transform3D(1, 0, 0, 0, -8.742278e-07, -1, 0, 20, -4.371139e-08, 0, 0, -0.06672907)
+collide_with_areas = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Right/RayCast3D"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 1.5543122e-15, 0, 0, 0.05, -8.624792e-05, -1.0037162, -0.0009936094)
+mesh = SubResource("CylinderMesh_k3xk7")
+surface_material_override/0 = SubResource("StandardMaterial3D_p6gy0")
+
+[node name="Depth Assests" type="Node" parent="."]
+
+[node name="ArrowPad" type="CSGCylinder3D" parent="Depth Assests"]
+transform = Transform3D(1, 0, 0, 0, 0.05, 0, 0, 0, 1, 0, 0, -3.3058472)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="Depth Assests/ArrowPad"]
+transform = Transform3D(-2.1855694e-08, 0.05, -4.371139e-08, 0, -2.1855695e-09, -1, -0.5, -2.1855695e-09, 1.9106855e-15, 0.01953113, 1.292479, 0)
+material = SubResource("StandardMaterial3D_wn1eb")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="Depth Assests/ArrowPad"]
+transform = Transform3D(0.21213204, 0.03535534, -3.090862e-08, 0, -2.1855695e-09, -1, -0.21213204, 0.03535534, -3.090862e-08, -0.091388434, 1.1865807, -0.10789657)
+material = SubResource("StandardMaterial3D_wn1eb")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="Depth Assests/ArrowPad"]
+transform = Transform3D(0.21213204, -0.03535534, 3.090862e-08, 0, -2.1855695e-09, -1, 0.21213204, 0.03535534, -3.090862e-08, 0.12916374, 1.1865807, -0.09895468)
+material = SubResource("StandardMaterial3D_wn1eb")
+
+[node name="Floor" type="CSGBox3D" parent="Depth Assests"]
+transform = Transform3D(100, 0, 0, 0, 0.055, 0, 0, 0, 100, 0, -0.11037964, 0)
+material = SubResource("StandardMaterial3D_idc6y")
+
+[node name="FloorArea" type="Area3D" parent="Depth Assests/Floor"]
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Depth Assests/Floor/FloorArea"]
+shape = SubResource("BoxShape3D_ydsm2")
+
+[connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]
+[connection signal="input_vector2_changed" from="Player/Right" to="Player" method="_on_right_input_vector_2_changed"]

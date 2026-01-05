@@ -1,0 +1,174 @@
+[gd_scene load_steps=21 format=3 uid="uid://bvxwcajeoegxc"]
+
+[ext_resource type="Script" uid="uid://b0arcax67joif" path="res://Scripts/initializevr.gd" id="1_41g2m"]
+[ext_resource type="Script" uid="uid://ex1gx0dyf8wm" path="res://Scripts/finalDestination/arrowMove.gd" id="2_1yv5g"]
+
+[sub_resource type="Environment" id="Environment_2t1jq"]
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_b4ijq"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ull1x"]
+transparency = 1
+blend_mode = 3
+albedo_color = Color(1, 0, 0.5803922, 0.54901963)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_b4ijq"]
+albedo_color = Color(0.48339885, 2.6765938, 2.6765938, 1)
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_1yv5g"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1yv5g"]
+albedo_color = Color(1, 1, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_hnsxo"]
+albedo_color = Color(1, 0.5137255, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mr3k8"]
+albedo_color = Color(0.023529412, 0.5294118, 0.047058824, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_wakpl"]
+albedo_color = Color(0.8627451, 0.50980395, 0.7882353, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_nwcbl"]
+albedo_color = Color(0.35686275, 0.5803922, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_1ktws"]
+albedo_color = Color(0.54901963, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5v55u"]
+albedo_color = Color(0.33333334, 0.6117647, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_5e1pf"]
+albedo_color = Color(0.5764706, 0, 1, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_modli"]
+albedo_color = Color(1, 0.49411765, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2ulvr"]
+albedo_color = Color(1, 0, 0.2509804, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_vh6va"]
+albedo_color = Color(1, 0.53333336, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ss36j"]
+albedo_color = Color(1, 0, 0.1882353, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_mf3aw"]
+albedo_color = Color(1, 0.5529412, 0, 1)
+
+[node name="Node3D" type="Node3D"]
+script = ExtResource("1_41g2m")
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(0.08686353, 0.8868179, -0.45388195, -0.15191406, 0.46206695, 0.873737, 0.9845694, -0.00694483, 0.17485687, 0, 0, 0)
+shadow_enabled = true
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_2t1jq")
+
+[node name="Player" type="XROrigin3D" parent="."]
+transform = Transform3D(0.99999976, 0, 0, 0, 1, 0, 0, 0, 0.99999976, 0, 0.123353, 0)
+script = ExtResource("2_1yv5g")
+
+[node name="XRCamera3D" type="XRCamera3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.7, 0)
+
+[node name="Left" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.5, 1, -0.5)
+tracker = &"left_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Left"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="Right" type="XRController3D" parent="Player"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.5, 1, -0.5)
+tracker = &"right_hand"
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Player/Right"]
+transform = Transform3D(0.1, 0, 0, 0, 0.1, 0, 0, 0, 0.1, 0, 0, 0)
+
+[node name="RayCast3D" type="RayCast3D" parent="Player/Right"]
+transform = Transform3D(1, 0, 0, 0, -8.742278e-07, -1, 0, 20, -4.371139e-08, 0, 0, -0.06672907)
+collide_with_areas = true
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="Player/Right/RayCast3D"]
+transform = Transform3D(0.05, 0, 0, 0, 1, 1.5543122e-15, 0, 0, 0.05, -8.624792e-05, -1.0037162, -0.0009936094)
+mesh = SubResource("CylinderMesh_b4ijq")
+surface_material_override/0 = SubResource("StandardMaterial3D_ull1x")
+
+[node name="Floor" type="CSGBox3D" parent="."]
+transform = Transform3D(100, 0, 0, 0, 0.055, 0, 0, 0, 100, 0, -0.11037964, 0)
+material = SubResource("StandardMaterial3D_b4ijq")
+
+[node name="FloorArea" type="Area3D" parent="Floor"]
+
+[node name="FloorCollision" type="CollisionShape3D" parent="Floor/FloorArea"]
+shape = SubResource("BoxShape3D_1yv5g")
+
+[node name="ArrowPad" type="CSGCylinder3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.05, 0, 0, 0, 1, 0, 0, -3.3058472)
+
+[node name="CSGCylinder3D" type="CSGCylinder3D" parent="ArrowPad"]
+transform = Transform3D(-2.1855694e-08, 0.05, -4.371139e-08, 0, -2.1855695e-09, -1, -0.5, -2.1855695e-09, 1.9106855e-15, 0.01953113, 1.292479, 0)
+material = SubResource("StandardMaterial3D_1yv5g")
+
+[node name="CSGCylinder3D2" type="CSGCylinder3D" parent="ArrowPad"]
+transform = Transform3D(0.21213204, 0.03535534, -3.090862e-08, 0, -2.1855695e-09, -1, -0.21213204, 0.03535534, -3.090862e-08, -0.091388434, 1.1865807, -0.10789657)
+material = SubResource("StandardMaterial3D_1yv5g")
+
+[node name="CSGCylinder3D3" type="CSGCylinder3D" parent="ArrowPad"]
+transform = Transform3D(0.21213204, -0.03535534, 3.090862e-08, 0, -2.1855695e-09, -1, 0.21213204, 0.03535534, -3.090862e-08, 0.12916374, 1.1865807, -0.09895468)
+material = SubResource("StandardMaterial3D_1yv5g")
+
+[node name="Blocks" type="Node" parent="."]
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.7723572, -7.0533166)
+material = SubResource("StandardMaterial3D_hnsxo")
+
+[node name="CSGBox3D2" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -6.549158, 0.9260199, 0)
+material = SubResource("StandardMaterial3D_mr3k8")
+
+[node name="CSGBox3D3" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.8344307, 0.9781692, 4.2281895)
+material = SubResource("StandardMaterial3D_wakpl")
+
+[node name="CSGBox3D4" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.209384, 1.0141182, 3.1956704)
+material = SubResource("StandardMaterial3D_nwcbl")
+
+[node name="CSGBox3D5" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4.0567513, 0.8589163, 9.605306)
+material = SubResource("StandardMaterial3D_1ktws")
+
+[node name="CSGBox3D6" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 7.959773, 0.982502, -3.2122822)
+material = SubResource("StandardMaterial3D_5v55u")
+
+[node name="CSGBox3D7" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4.5165405, 1.0351825, 9.086811)
+material = SubResource("StandardMaterial3D_5e1pf")
+
+[node name="CSGBox3D8" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -8.193302, 0.9574237, -8.129133)
+material = SubResource("StandardMaterial3D_modli")
+
+[node name="CSGBox3D9" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 12.474562, 1.1140618, -12.62217)
+material = SubResource("StandardMaterial3D_2ulvr")
+
+[node name="CSGBox3D10" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -10.962804, 0.8166323, 6.22559)
+material = SubResource("StandardMaterial3D_vh6va")
+
+[node name="CSGBox3D11" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 10.985355, 0.8255217, 15.486343)
+material = SubResource("StandardMaterial3D_ss36j")
+
+[node name="CSGBox3D12" type="CSGBox3D" parent="Blocks"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -11.497014, 1.0623591, -3.0076203)
+material = SubResource("StandardMaterial3D_mf3aw")
+
+[connection signal="button_pressed" from="Player/Right" to="Player" method="_on_right_button_pressed"]
+[connection signal="input_vector2_changed" from="Player/Right" to="Player" method="_on_right_input_vector_2_changed"]
